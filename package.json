@@ -9,7 +9,7 @@
     "samples/*"
   ],
   "scripts": {
-    "build": "npm run build --workspace=@warden/shared && npm run build --workspace=@warden/sdk && npm run build --workspace=@warden/api && npm run build --workspace=@warden/cli && npm run build --workspace=@warden/web && npm run build --workspace=@warden/demo-mcp-server",
+    "build": "npm run build --workspace=@warden/shared && npm run build --workspace=@warden/sdk && npm run build --workspace=@warden/api && npm run build --workspace=@warden/cli && npm run build --workspace=@warden/web",
     "dev:api": "npm --workspace=apps/api run dev",
     "dev:web": "npm --workspace=apps/web run dev",
     "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
