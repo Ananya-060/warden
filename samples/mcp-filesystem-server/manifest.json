@@ -1,0 +1,57 @@
+{
+  "name": "@modelcontextprotocol/server-filesystem",
+  "version": "0.5.2",
+  "description": "Official Model Context Protocol server for local filesystem access. Enables AI agents to read, list, and modify files within designated allowed paths.",
+  "source_url": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
+  "permissions": [
+    "fs.read",
+    "fs.write"
+  ],
+  "tools": [
+    {
+      "name": "read_file",
+      "description": "Read complete UTF-8 contents of a file from an allowed path.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "Absolute path to the file" }
+        },
+        "required": ["path"]
+      }
+    },
+    {
+      "name": "write_file",
+      "description": "Write content to a file at an allowed path.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "Absolute path to write" },
+          "content": { "type": "string", "description": "File contents" }
+        },
+        "required": ["path", "content"]
+      }
+    },
+    {
+      "name": "list_directory",
+      "description": "List files and directories contained within a given path.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "Directory path" }
+        },
+        "required": ["path"]
+      }
+    },
+    {
+      "name": "get_file_info",
+      "description": "Retrieve metadata (size, creation time, permissions) for a file or directory.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "Target path" }
+        },
+        "required": ["path"]
+      }
+    }
+  ]
+}

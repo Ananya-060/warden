@@ -1,0 +1,10 @@
+node_modules
+**/node_modules
+**/dist
+.git
+.env
+deploy/.env
+*.log
+*.pyc
+__pycache__
+warden_db.json

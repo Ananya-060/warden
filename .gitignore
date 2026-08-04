@@ -1,0 +1,41 @@
+# === SECRETS & ENVIRONMENT ===
+deploy/.env
+.env
+.env.local
+.env.production
+.env.staging
+
+# === NODE ===
+node_modules/
+dist/
+*.tsbuildinfo
+
+# === PYTHON ===
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+
+# === DATABASE (local runtime data — not for source control) ===
+apps/api/warden_db.json
+warden_db.json
+
+# === WARDEN CERTIFICATES (generated at runtime) ===
+warden-cert-*.json
+
+# === OS FILES ===
+.DS_Store
+Thumbs.db
+
+# === EDITORS ===
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === LOGS ===
+*.log
+npm-debug.log*

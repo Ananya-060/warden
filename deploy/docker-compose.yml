@@ -1,0 +1,33 @@
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.api
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      WARDEN_API_KEY: ${WARDEN_API_KEY:?Set WARDEN_API_KEY in .env}
+      WARDEN_CORS_ORIGIN: ${WARDEN_CORS_ORIGIN:-}
+      WARDEN_DB_PATH: /data/warden_db.json
+    volumes:
+      - warden-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/v1/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  web:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.web
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "${WARDEN_PORT:-8080}:80"
+    restart: unless-stopped
+
+volumes:
+  warden-data:

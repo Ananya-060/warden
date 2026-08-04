@@ -1,0 +1,91 @@
+{
+  "name": "@modelcontextprotocol/server-github",
+  "version": "0.6.2",
+  "description": "Official Model Context Protocol server for GitHub integration. Enables LLM agents to interact with repositories, issues, pull requests, commits, and branches.",
+  "source_url": "https://github.com/modelcontextprotocol/servers/tree/main/src/github",
+  "permissions": [
+    "repo.read",
+    "repo.write",
+    "issues.read",
+    "issues.write",
+    "pull_requests.read",
+    "pull_requests.write"
+  ],
+  "tools": [
+    {
+      "name": "create_or_update_file",
+      "description": "Create or update a single file in a GitHub repository.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "owner": { "type": "string", "description": "Repository owner (user or organization)" },
+          "repo": { "type": "string", "description": "Repository name" },
+          "path": { "type": "string", "description": "Path to the file within the repository" },
+          "content": { "type": "string", "description": "Content of the file" },
+          "message": { "type": "string", "description": "Commit message" },
+          "branch": { "type": "string", "description": "Branch to commit to" }
+        },
+        "required": ["owner", "repo", "path", "content", "message", "branch"]
+      }
+    },
+    {
+      "name": "search_repositories",
+      "description": "Search for GitHub repositories using query parameters.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "Search query" },
+          "page": { "type": "number", "description": "Page number for pagination" },
+          "per_page": { "type": "number", "description": "Number of results per page" }
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "name": "create_issue",
+      "description": "Create a new issue in a GitHub repository.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "owner": { "type": "string" },
+          "repo": { "type": "string" },
+          "title": { "type": "string" },
+          "body": { "type": "string" },
+          "assignees": { "type": "array", "items": { "type": "string" } },
+          "labels": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["owner", "repo", "title"]
+      }
+    },
+    {
+      "name": "get_file_contents",
+      "description": "Get the contents of a file or directory in a GitHub repository.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "owner": { "type": "string" },
+          "repo": { "type": "string" },
+          "path": { "type": "string" },
+          "ref": { "type": "string", "description": "Commit hash or branch reference" }
+        },
+        "required": ["owner", "repo", "path"]
+      }
+    },
+    {
+      "name": "create_pull_request",
+      "description": "Create a new pull request in a GitHub repository.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "owner": { "type": "string" },
+          "repo": { "type": "string" },
+          "title": { "type": "string" },
+          "body": { "type": "string" },
+          "head": { "type": "string", "description": "The name of the branch where your changes are implemented" },
+          "base": { "type": "string", "description": "The name of the branch into which you want your code merged" }
+        },
+        "required": ["owner", "repo", "title", "head", "base"]
+      }
+    }
+  ]
+}

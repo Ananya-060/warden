@@ -1,0 +1,22 @@
+{
+  "name": "@warden/cli",
+  "version": "1.0.0",
+  "type": "module",
+  "bin": {
+    "warden": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@warden/sdk": "*",
+    "@warden/shared": "*",
+    "commander": "^12.1.0",
+    "picocolors": "^1.0.1",
+    "yaml": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "typescript": "^5.4.5"
+  }
+}

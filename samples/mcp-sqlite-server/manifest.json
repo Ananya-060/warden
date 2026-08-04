@@ -1,0 +1,53 @@
+{
+  "name": "@modelcontextprotocol/server-sqlite",
+  "version": "0.5.0",
+  "description": "Official Model Context Protocol server for SQLite databases. Exposes schema inspection, SQL queries, and table operations.",
+  "source_url": "https://github.com/modelcontextprotocol/servers/tree/main/src/sqlite",
+  "permissions": [
+    "db.read",
+    "db.write"
+  ],
+  "tools": [
+    {
+      "name": "sqlite_read_query",
+      "description": "Execute a SELECT query on the SQLite database.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "SQL SELECT query string" }
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "name": "sqlite_list_tables",
+      "description": "List all tables in the SQLite database.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "sqlite_describe_table",
+      "description": "Get column definitions and schema information for a specific table.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "table_name": { "type": "string", "description": "Name of the table to describe" }
+        },
+        "required": ["table_name"]
+      }
+    },
+    {
+      "name": "sqlite_create_table",
+      "description": "Create a new table in the database schema.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "CREATE TABLE statement" }
+        },
+        "required": ["query"]
+      }
+    }
+  ]
+}

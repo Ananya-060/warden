@@ -1,0 +1,7 @@
+{
+  "tools": [
+    "samples/mcp-filesystem-server/manifest.json",
+    "samples/mcp-github-server/manifest.json",
+    "samples/mcp-sqlite-server/manifest.json"
+  ]
+}

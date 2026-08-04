@@ -1,0 +1,45 @@
+{
+  "name": "@modelcontextprotocol/server-puppeteer",
+  "version": "0.4.0",
+  "description": "Official Model Context Protocol server for Puppeteer browser automation. Enables headless page navigation, screenshot capture, and element clicking.",
+  "source_url": "https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer",
+  "permissions": [
+    "browser.navigate",
+    "browser.interact"
+  ],
+  "tools": [
+    {
+      "name": "puppeteer_navigate",
+      "description": "Navigate the automated browser to a specified URL.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": { "type": "string", "description": "Target Web URL" }
+        },
+        "required": ["url"]
+      }
+    },
+    {
+      "name": "puppeteer_screenshot",
+      "description": "Capture a screenshot of the currently loaded browser page.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "description": "Name for screenshot file" },
+          "fullPage": { "type": "boolean", "description": "Capture full scrollable height" }
+        }
+      }
+    },
+    {
+      "name": "puppeteer_click",
+      "description": "Click an element on the active web page using CSS selector.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "selector": { "type": "string", "description": "CSS selector of element to click" }
+        },
+        "required": ["selector"]
+      }
+    }
+  ]
+}

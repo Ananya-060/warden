@@ -1,0 +1,63 @@
+{
+  "name": "@modelcontextprotocol/server-slack",
+  "version": "0.4.1",
+  "description": "Official Model Context Protocol server for Slack workspace integration. Allows AI assistants to inspect channels, post messages, add reactions, and fetch thread context.",
+  "source_url": "https://github.com/modelcontextprotocol/servers/tree/main/src/slack",
+  "permissions": [
+    "channels.read",
+    "chat.write",
+    "reactions.write",
+    "history.read"
+  ],
+  "tools": [
+    {
+      "name": "slack_list_channels",
+      "description": "List public or private channels in the connected Slack workspace.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "types": { "type": "string", "description": "Comma-separated list of channel types (public_channel, private_channel)" },
+          "limit": { "type": "number", "description": "Maximum number of channels to return" }
+        }
+      }
+    },
+    {
+      "name": "slack_post_message",
+      "description": "Post a message to a specified Slack channel.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "channel_id": { "type": "string", "description": "The ID of the channel to post to" },
+          "text": { "type": "string", "description": "The message text to send" },
+          "thread_ts": { "type": "string", "description": "Optional parent message timestamp to post in a thread" }
+        },
+        "required": ["channel_id", "text"]
+      }
+    },
+    {
+      "name": "slack_get_channel_history",
+      "description": "Fetch historical messages from a Slack channel.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "channel_id": { "type": "string", "description": "The ID of the channel" },
+          "limit": { "type": "number", "description": "Number of messages to retrieve" }
+        },
+        "required": ["channel_id"]
+      }
+    },
+    {
+      "name": "slack_add_reaction",
+      "description": "Add an emoji reaction to a message.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "channel_id": { "type": "string" },
+          "timestamp": { "type": "string" },
+          "reaction_name": { "type": "string" }
+        },
+        "required": ["channel_id", "timestamp", "reaction_name"]
+      }
+    }
+  ]
+}
