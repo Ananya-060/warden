@@ -1,8 +1,16 @@
 FROM node:20-alpine AS build
 WORKDIR /app
 COPY package.json package-lock.json tsconfig.json ./
+COPY apps/api/package.json apps/api/package.json
+COPY apps/cli/package.json apps/cli/package.json
 COPY apps/web/package.json apps/web/package.json
 COPY packages/shared/package.json packages/shared/package.json
+COPY packages/sdk/package.json packages/sdk/package.json
+COPY samples/mcp-filesystem-server/package.json samples/mcp-filesystem-server/package.json
+COPY samples/mcp-github-server/package.json samples/mcp-github-server/package.json
+COPY samples/mcp-puppeteer-server/package.json samples/mcp-puppeteer-server/package.json
+COPY samples/mcp-slack-server/package.json samples/mcp-slack-server/package.json
+COPY samples/mcp-sqlite-server/package.json samples/mcp-sqlite-server/package.json
 RUN npm ci --ignore-scripts
 COPY apps/web apps/web
 COPY packages/shared packages/shared
