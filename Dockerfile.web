@@ -8,12 +8,6 @@ COPY apps/api-python/package.json apps/api-python/
 COPY packages/shared/package.json packages/shared/
 COPY packages/sdk/package.json packages/sdk/
 COPY packages/sdk-python/package.json packages/sdk-python/
-RUN mkdir -p samples/mcp-filesystem-server samples/mcp-github-server samples/mcp-puppeteer-server samples/mcp-slack-server samples/mcp-sqlite-server \
-  && echo '{"name":"mcp-filesystem-server","version":"1.0.0"}' > samples/mcp-filesystem-server/package.json \
-  && echo '{"name":"mcp-github-server","version":"1.0.0"}' > samples/mcp-github-server/package.json \
-  && echo '{"name":"mcp-puppeteer-server","version":"1.0.0"}' > samples/mcp-puppeteer-server/package.json \
-  && echo '{"name":"mcp-slack-server","version":"1.0.0"}' > samples/mcp-slack-server/package.json \
-  && echo '{"name":"mcp-sqlite-server","version":"1.0.0"}' > samples/mcp-sqlite-server/package.json
 RUN npm ci --ignore-scripts
 COPY apps/web apps/web
 COPY packages/shared packages/shared
