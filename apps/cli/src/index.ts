@@ -328,7 +328,7 @@ program
   .action(async (policyFile: string) => {
     try {
       const yamlStr = fs.readFileSync(policyFile, 'utf-8');
-      const res = await fetch(`${API_BASE}/v1/policies/simulation/simulate`, {
+      const res = await fetch(`${API_BASE}/v1/policies/default/simulate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rules: yamlStr }),

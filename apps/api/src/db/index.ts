@@ -200,6 +200,13 @@ class WardenDatabase {
               } catch (_) {}
             }
           }
+        } else if (sqlUpper.startsWith('UPDATE ORGANIZATIONS SET NAME')) {
+          const orgId = params[params.length - 1];
+          const newName = params[0];
+          const org = dbInstance.data.organizations.find((o) => o.id === orgId);
+          if (org) {
+            org.name = newName;
+          }
         }
 
         dbInstance.save();

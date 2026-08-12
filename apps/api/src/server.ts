@@ -267,7 +267,7 @@ server.post('/v1/certificates/import', async (request, reply) => {
   return { imported: true, certificate: cert, verification };
 });
 
-// 8. Revoke Certificate
+// 9b. Revoke Certificate
 server.post('/v1/certificates/:id/revoke', async (request, reply) => {
   if ((request as any).wardenAuth && !requireScope(request, reply, 'certificate:write')) return;
   const { id } = request.params as { id: string };
@@ -332,7 +332,23 @@ server.get('/v1/policies', async () => {
   return rows.map((r) => ({ ...r, rules: JSON.parse(r.rules) }));
 });
 
+// POST /v1/policies/:id/simulate — simulate a candidate policy against historical scans
 server.post('/v1/policies/:id/simulate', async (request, reply) => {
+  const body = request.body as any;
+  if (!body || !body.rules) {
+    return reply.status(400).send({ error: "Missing required field 'rules' (YAML/JSON policy string)." });
+  }
+
+  try {
+    const sim = PolicyEngineService.simulatePolicy(body.rules, body.limit || 50);
+    return sim;
+  } catch (err) {
+    return reply.status(400).send({ error: (err as Error).message });
+  }
+});
+
+// POST /v1/policies/simulation/simulate — alias for CLI compat (same handler)
+server.post('/v1/policies/simulation/simulate', async (request, reply) => {
   const body = request.body as any;
   if (!body || !body.rules) {
     return reply.status(400).send({ error: "Missing required field 'rules' (YAML/JSON policy string)." });
